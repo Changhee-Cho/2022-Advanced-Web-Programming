@@ -1,0 +1,131 @@
+<!--
+ alert기능, 아이디 중복확인 기능 필요
+
+-->
+<html>
+	<head>
+		<meta charset='UTF-8'>
+			<meta name='viewport'
+				content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
+			<title>배재대 커뮤니티, 배재콕</title>
+			<link rel='stylesheet' href='../css/reset.css'>
+			<link rel='stylesheet' href='../css/common.css'>
+			<link rel='stylesheet' href='../css/style.css'>
+			<link rel='stylesheet' href='../css/login.css'>
+	</head>
+		<body>
+			<section id='container'>
+					<header id='header'>
+						<section class='h_inner'>
+							<h1 class='logo'>
+								<a href='../login/login.html'>
+									<img src = '../imgs/logo.png' class='sprite_pcu_icon'></img>
+									</a>
+							</h1>
+				<div class='search_field'>
+				</div>
+						</section>
+					</header>
+			</section>
+			
+				<div id='main_container'>
+					<div class='form_container'>
+						<div class='form'>
+							<img src = '../imgs/logo1.png' class='sprite_insta_big_logo'></img>
+						
+										<form method='post' action='insertmember.php'>
+											<table>
+												<tr>
+												
+													<td>아이디</td>
+												
+													<td>
+														<input type='text' name='id' id ='uid' required>
+													</td>
+												</tr>
+												<tr>
+													<input type='hidden' name='decide_id' id='decide_id'>
+													<td colspan =2><span id='decide' style='color:red;'>ID 중복 여부를 확인해주세요.</span>
+														<input type='button' id='check_button' value='ID 중복 검사' onclick='checkid()';></td>
+													
+												</tr>
+												<tr>
+												
+													<td>암호</td>
+													<td>
+														<input type='password' name='pw' required>
+													</td>
+												
+												</tr> 
+												<tr>
+											
+													<td>암호  확인</td>
+													<td>
+														<input type='password' name='pwcheck' required>
+													</td>
+												
+												</tr>
+												<tr>
+													<td>이름</td>
+													<td>
+														<input type='text' name='name' required>
+													</td>
+												</tr>
+												
+												<tr>
+													<td>학번</td>
+													<td>
+														<input type='text' name='school_num' required>
+													</td>
+												</tr>
+												
+												<tr>
+													<td>이메일 주소</td>
+													<td>
+														<input type='email' name='email_id' required>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<input type='submit' id='join_button' value='회원가입' class='submit_btn' disabled=true>
+													</td>
+												</tr>
+											</table>
+										</form>
+						</div>
+					</div>
+				</div>
+			</section>
+			<script>
+function checkid(){
+        var userid = document.getElementById("uid").value;
+        if(userid)
+        {
+                url = "check.php?userid="+userid;
+                window.open(url,"chkid","width=400,height=200");
+        } else {
+                alert("아이디를 입력하세요.");
+        }
+}
+
+function decide(){
+        document.getElementById("decide").innerHTML = "<span style='color:blue;'>ID 중복 확인되었습니다.</span>"
+        document.getElementById("decide_id").value = document.getElementById("uid").value
+        document.getElementById("uid").disabled = true
+        document.getElementById("join_button").disabled = false
+        document.getElementById("check_button").value = "다른 ID로 변경"
+        document.getElementById("check_button").setAttribute("onclick", "change()")
+}
+
+function change(){
+        document.getElementById("decide").innerHTML = "<span style='color:red;'>ID 중복 여부를 확인해주세요</span>"
+        document.getElementById("uid").disabled = false
+        document.getElementById("uid").value = ""
+        document.getElementById("join_button").disabled = true
+        document.getElementById("check_button").value = "ID 중복 검사"
+        document.getElementById("check_button").setAttribute("onclick", "checkid()")
+}
+
+			</script>
+		</body>
+</html>
